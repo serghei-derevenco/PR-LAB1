@@ -3,8 +3,6 @@ import socket
 from parser import parse_data, select_from_file
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-
 server_address = ('127.0.0.1', 7777)
 print('Getting data from server...')
 server_socket.bind(server_address)
