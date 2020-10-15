@@ -11,10 +11,8 @@ def make_request(path):
     response = requests.get(link, headers={'X-Access-Token': get_token()}).json()
     return response
 
-
 def get_data():
     links = make_request('/home')['link']
-
     executor = ThreadPoolExecutor(max_workers=6)
     queue = [executor.submit(make_request, links[key]) for key in links]
     
@@ -22,11 +20,9 @@ def get_data():
 
     while queue:
         done, queue = wait(queue, return_when=FIRST_COMPLETED)
-
         for future in done:
             result = future.result()
             results.append(result)
-
             if 'link' in result and 'msg' not in result:
                 links = result['link']
                 for key in links:
