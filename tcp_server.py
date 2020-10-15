@@ -6,10 +6,10 @@ server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 server_address = ('127.0.0.1', 7777)
-print('Getting data from server')
+print('Getting data from server...')
 server_socket.bind(server_address)
 parse_data()
-print('Done, listening to client connections')
+print('Done!')
 
 while True:
     server_socket.listen(4)
@@ -22,7 +22,9 @@ while True:
         if data == 'exit':
             connection.close()
             break
+        elif 'select' not in data:
+            continue
         result = select_from_file(data)
         print('Sending to client result: ', result)
         connection.sendall(result.encode())
-        connection.send(b"#done")
+        connection.send(b"#yepyep")

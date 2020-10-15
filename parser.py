@@ -1,7 +1,6 @@
 import csv
 import json
 import yaml
-import requests
 import xmltodict
 from request_data import get_data
 
@@ -50,6 +49,3 @@ def select_from_file(query):
                 if result_row:
                     results.append(result_row)
         return json.dumps(results)
-    else:
-        return json.dumps(data)
-                    
